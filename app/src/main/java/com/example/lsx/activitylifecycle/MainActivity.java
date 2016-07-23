@@ -38,15 +38,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,ActivityThird.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String name="";
         super.onActivityResult(requestCode, resultCode, data);
-        String name=data.getStringExtra("back");
+        switch(requestCode){
+            case 0:
+                name=data.getStringExtra("back");
+                break;
+            case 1:
+                name=data.getStringExtra("backThird");
+                break;
+        }
+
         Toast.makeText(this,name,Toast.LENGTH_SHORT).show();
     }
 }
